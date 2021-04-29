@@ -1,0 +1,65 @@
+version: '3'
+services:
+  feeds:
+    image: devsblog
+    build: ./dockerfiles/services/
+    hostname: feeds
+    volumes:
+      - './feeds:/service'
+    command: python3 service.py
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+  comments:
+    image: devsblog
+    build: ./dockerfiles/services/
+    hostname: comments
+    volumes:
+      - './comments:/service'
+    command: python3 service.py
+    expose:
+      - '5001'
+    ports:
+      - '5001:5001'
+  likes:
+    image: devsblog
+    build: ./dockerfiles/services/
+    hostname: likes
+    volumes:
+      - './likes:/service'
+    command: python3 service.py
+    expose:
+      - '5002'
+    ports:
+      - '5002:5002'
+  authors:
+    image: devsblog
+    build: ./dockerfiles/services/
+    hostname: authors
+    volumes:
+      - './authors:/service'
+    command: python3 service.py
+    expose:
+      - '5003'
+    ports:
+      - '5003:5003'
+  devsblog_database:
+    image: mysql
+    hostname: devsblog_database
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+  files:
+    image: files
+    build: ./dockerfiles/nginx/
+    volumes:
+      - './assets/images:/usr/share/nginx/html'
+    hostname: files
+    expose:
+      - '80'
+    ports:
+      - '80:80'
