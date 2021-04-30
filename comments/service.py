@@ -38,7 +38,7 @@ def get_comments(feed_id, page):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute(
-        "SELECT id, feed, comment, name, account, DATE_FORMAT(date, '%Y-%m-%d T') as date " + 
+        "SELECT id, feed, comment, name, account, DATE_FORMAT(date, '%Y-%m-%d %T') as date " + 
         "FROM comments " +
         "WHERE feed = " + str(feed_id) + " " + 
         "ORDER BY date DESC " + 
