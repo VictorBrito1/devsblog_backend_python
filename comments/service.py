@@ -25,7 +25,7 @@ def generate_comment(comment):
         '_id': comment['id'],
         'feed': comment['feed'],
         'user': {
-            'account': comment['account'],
+            'email': comment['account'],
             'name': comment['name']
         },
         'datetime': comment['date'],
